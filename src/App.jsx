@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { API_URL } from './data/settings';
 import Table from './components/Table/Table';
 import Search from './components/Search/Search';
+import Modal from './components/Modal/Modal';
 
 function App() {
   const pageSize = 25;
@@ -10,6 +11,7 @@ function App() {
   const [result, setResult] = useState(null);
   const [resultTotal, setResultTotal] = useState(0);
   const [searchName, setSearchName] = useState('');
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const fetchArtcrimeData = async (requestedPage = 1, search = searchName) => {
     let headers = {};
@@ -49,6 +51,7 @@ function App() {
     <header><h1>National Stolen Art File</h1></header>
     <main>
       {isApiError && <p>An error occured, refresh your browser and try again.</p>}
+      <Modal content={selectedItem === null ? null : result[selectedItem]} setSelectedItem={setSelectedItem} />
       {!isApiError && result && (
         <Search
           searchName={searchName}
@@ -63,6 +66,7 @@ function App() {
             pageNumber={pageNumber}
             pageSize={pageSize}
             onClickPagination={fetchArtcrimeData}
+            setSelectedItem={setSelectedItem}
             categories={[
               {
                 title: 'Artwork title',

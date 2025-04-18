@@ -1,6 +1,6 @@
 import Pagination from "../Pagination/Pagination";
 
-function Table({ result, categories, resultTotal, pageNumber, pageSize, onClickPagination }) {
+function Table({ result, categories, resultTotal, pageNumber, pageSize, onClickPagination, setSelectedItem }) {
     return (
         <>
         <h2 className='visually-hidden'>List of national stolen art</h2>
@@ -16,6 +16,7 @@ function Table({ result, categories, resultTotal, pageNumber, pageSize, onClickP
                                 {categories.map((cat, index) => (
                                     <th role="columnheader" aria-colindex={index} key={cat.key}>{cat.title}</th>
                                 ))}
+                                <th>More information</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,6 +25,12 @@ function Table({ result, categories, resultTotal, pageNumber, pageSize, onClickP
                                     {categories.map((cat, index) => (
                                         <td role="gridcell" aria-colindex={index} key={`${item[cat.key]}+${index}`}>{item[cat.key]}</td>
                                     ))}
+                                    <td>
+                                        <button
+                                            className="btn primary"
+                                            onClick={() => setSelectedItem(i)}
+                                        >See details</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

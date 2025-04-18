@@ -125,11 +125,17 @@ main {
   th,
   td {
     text-align: left;
-    padding: 3px 6px;
+    padding: 6px;
   }
 
   tr:nth-child(even) {
     background-color: $white-pink-color;
+  }
+
+  .btn {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    white-space: pre;
   }
 }
 
@@ -197,6 +203,51 @@ main {
         }
       }
     }
+  }
+}
+
+.dialog {
+  border: none;
+  border-radius: $border-radius;
+  padding: $small-padding;
+
+  .dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > h2 {
+      max-width: 500px;
+    }
+
+    > button {
+      height: fit-content;
+    }
+  }
+
+  .dialog-content {
+    display: flex;
+    gap: $large-padding;
+
+    img {
+      width: 150px;
+    }
+
+    .text-content {
+      max-width: 500px;
+
+      p {
+        font-weight: 400;
+  
+        > span {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  &::backdrop {
+    background-color:hsla(0, 0%, 0%, 0.5);
   }
 }
 
