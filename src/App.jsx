@@ -9,14 +9,14 @@ function App() {
   const [result, setResult] = useState(null);
   const [resultTotal, setResultTotal] = useState(0);
 
-  const fetchArtcrimeData = async () => {
+  const fetchArtcrimeData = async (requestedPage = 1) => {
     let headers = {};
     if (import.meta.env.VITE_API_KEY) {
       headers['X-Api-Key'] = import.meta.env.VITE_API_KEY
     }
 
     try {
-      const response = await fetch(`${API_URL}?pageSize=${pageSize}&page=${pageNumber}&sort_order=desc&sort_on=_score`, {
+      const response = await fetch(`${API_URL}?pageSize=${pageSize}&page=${requestedPage}&sort_order=desc&sort_on=_score`, {
         headers
       });
       if (!response.ok) {
@@ -44,12 +44,13 @@ function App() {
     <header><h1>National Stolen Art File</h1></header>
     <main>
       {isApiError && <p>An error occured, refresh your browser and try again.</p>}
-      {!isApiError && result && (
-        <div>
-          <h2 className='visually-hidden'>List of national stolen art</h2>
+      {!isApiError && result && ( 
           <Table
             result={result}
             resultTotal={resultTotal}
+            pageNumber={pageNumber}
+            pageSize={pageSize}
+            onClickPagination={fetchArtcrimeData}
             categories={[
               {
                 title: 'Artwork title',
@@ -65,7 +66,6 @@ function App() {
               }
             ]}
           />
-        </div>
       )}
     </main>
     </>
