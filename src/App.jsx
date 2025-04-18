@@ -20,7 +20,7 @@ function App() {
     }
     let artistSearch = '';
     if (search) {
-      artistSearch = `maker=${search}&`;
+      artistSearch = `maker=${search.toLocaleLowerCase()}&`;
     }
 
     try {
@@ -35,7 +35,6 @@ function App() {
       setPageNumber(jsonResponse?.page);
       setResultTotal(jsonResponse?.total);
       setResult(jsonResponse?.items);
-      console.log(jsonResponse);
     } catch (error) {
       console.error(error.message);
       setIsApiError(true);
