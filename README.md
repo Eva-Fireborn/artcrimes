@@ -1,17 +1,25 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Run locally
 
-Currently, two official plugins are available:
+`npm run dev` or `yarn run dev`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Build
 
-## Expanding the ESLint configuration
+`npm run build` or `yarn run build`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Environment variables
 
-## TODO
+If you want to add an API key to the project create .env file and add
+VITE_API_KEY={your-token}
+
+## TODO (improvements)
 - Add AbortController to initial fetch to the API
-- Add loader to page
+- Add loader animtion to page
 - Clear search results should be smarter, know if there has been a search or not
+- Test accessability on all devices
+- Adjust for all viewports
+- Refactor pagination code to be more readable
+- Add routing in pagination so you can switch page with the url aswell
+- Improve design
+- Format information text in Modal better, remove semi-colons
