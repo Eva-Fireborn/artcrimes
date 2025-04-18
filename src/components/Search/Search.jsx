@@ -11,19 +11,20 @@ function Search({ searchName, setSearchName, onClickSearch }) {
     }
 
     return (
-        <div>
+        <div className="form-wrapper">
             <form onSubmit={handleSubmit}>
-                <label htmlFor="artist">Artist</label>
+                <label className="visually-hidden" htmlFor="artist">Artist</label>
                 <input
                     type="text"
                     id="artist"
                     name="name"
+                    placeholder="Search for artist name"
                     value={searchName}
                     onChange={(e) => setSearchName(e.target.value)}
                 />
-                <button type="submit" disabled={!searchName}>Search</button>
+                <button className="btn primary" type="submit" disabled={!searchName}>Search</button>
             </form>
-            {<button onClick={onClickClearResult}>Clear search results</button>}
+            {<button className="btn secondary" onClick={onClickClearResult}>Clear search results</button>}
         </div>
     )
 }
