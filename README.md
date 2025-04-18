@@ -13,3 +13,5 @@ If you are developing a production application, we recommend using TypeScript wi
 
 ## TODO
 - Add AbortController to initial fetch to the API
+- Add loader to page
+- Clear search results should be smarter, know if there has been a search or not

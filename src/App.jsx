@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { API_URL } from './data/settings';
 import Table from './components/Table/Table';
+import Search from './components/Search/Search';
 
 function App() {
   const pageSize = 25;
@@ -8,15 +9,20 @@ function App() {
   const [isApiError, setIsApiError] = useState(false);
   const [result, setResult] = useState(null);
   const [resultTotal, setResultTotal] = useState(0);
+  const [searchName, setSearchName] = useState('');
 
-  const fetchArtcrimeData = async (requestedPage = 1) => {
+  const fetchArtcrimeData = async (requestedPage = 1, search = searchName) => {
     let headers = {};
     if (import.meta.env.VITE_API_KEY) {
       headers['X-Api-Key'] = import.meta.env.VITE_API_KEY
     }
+    let artistSearch = '';
+    if (search) {
+      artistSearch = `maker=${search}&`;
+    }
 
     try {
-      const response = await fetch(`${API_URL}?pageSize=${pageSize}&page=${requestedPage}&sort_order=desc&sort_on=_score`, {
+      const response = await fetch(`${API_URL}?${artistSearch}pageSize=${pageSize}&page=${requestedPage}&sort_order=desc&sort_on=_score`, {
         headers
       });
       if (!response.ok) {
@@ -36,7 +42,6 @@ function App() {
 
   useEffect(() => {
     fetchArtcrimeData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -44,6 +49,13 @@ function App() {
     <header><h1>National Stolen Art File</h1></header>
     <main>
       {isApiError && <p>An error occured, refresh your browser and try again.</p>}
+      {!isApiError && result && (
+        <Search
+          searchName={searchName}
+          setSearchName={setSearchName}
+          onClickSearch={fetchArtcrimeData}
+        />
+      )}
       {!isApiError && result && ( 
           <Table
             result={result}
