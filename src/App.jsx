@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { API_URL } from './data/settings';
+import Table from './components/Table/Table';
 
 function App() {
   const pageSize = 25;
@@ -46,7 +47,24 @@ function App() {
       {!isApiError && result && (
         <div>
           <h2 className='visually-hidden'>List of national stolen art</h2>
-          {resultTotal}
+          <Table
+            result={result}
+            resultTotal={resultTotal}
+            categories={[
+              {
+                title: 'Artwork title',
+                key: 'title'
+              },
+              {
+                title: 'Artist',
+                key: 'maker'
+              },
+              {
+                title: 'Crime category',
+                key: 'crimeCategory'
+              }
+            ]}
+          />
         </div>
       )}
     </main>
